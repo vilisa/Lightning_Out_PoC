@@ -9,7 +9,7 @@ var jsforce_1 = __importDefault(require('jsforce')); // JS Connector (https://js
 // ENVIRONMENT
 var conn;
 var SALESFORCE_LOGIN_SERVER = '' + process.env.SALESFORCE_LOGIN_SERVER;
-var SALESFORCE_LIGHTNING_SERVER = '' + process.env.SALESFORCE_EXPERIENCE_DOMAIN;
+var SALESFORCE_EXPERIENCE_DOMAIN = '' + process.env.SALESFORCE_EXPERIENCE_DOMAIN;
 var SALESFORCE_USER_USERNAME = '' + process.env.SALESFORCE_USER_USERNAME;
 var SALESFORCE_USER_PASSWORD = '' + process.env.SALESFORCE_USER_PASSWORD;
 var SALESFORCE_USER_SECTOKEN = '' + process.env.SALESFORCE_USER_SECTOKEN;
@@ -23,8 +23,8 @@ var Salesforce = /** @class */ (function () {
 		output = output && (process.env.SALESFORCE_EXPERIENCE_DOMAIN ? true : false);
 		if (!output)
 			throw new Error('process.env.SALESFORCE_EXPERIENCE_DOMAIN does not have a valid value');
-		output = output && (SALESFORCE_LIGHTNING_SERVER ? true : false);
-		if (!output) throw new Error('SALESFORCE_LIGHTNING_SERVER does not have a valid value');
+		output = output && (SALESFORCE_EXPERIENCE_DOMAIN ? true : false);
+		if (!output) throw new Error('SALESFORCE_EXPERIENCE_DOMAIN does not have a valid value');
 		output = output && (SALESFORCE_USER_USERNAME ? true : false);
 		if (!output) throw new Error('SALESFORCE_USER_USERNAME does not have a valid value');
 		output = output && (SALESFORCE_USER_PASSWORD ? true : false);
@@ -46,7 +46,7 @@ var Salesforce = /** @class */ (function () {
 							username: SALESFORCE_USER_USERNAME,
 							accessToken: conn.accessToken,
 							instanceUrl: conn.instanceUrl,
-							experienceSiteUrl: SALESFORCE_LIGHTNING_SERVER,
+							experienceSiteUrl: SALESFORCE_EXPERIENCE_DOMAIN,
 							userId: userInfo.id,
 							orgId: userInfo.organizationId
 						});
