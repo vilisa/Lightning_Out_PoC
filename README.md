@@ -18,4 +18,7 @@ Configure the ENV and execute the Node.js server.
 **Note:** The Node.js web server is using a self-signed certificate which is required for HTTPS, but obviously is not secured. When you open the "secured" site, the browser is going to report a warning but you can bypass it and get to the content. When you deploy this to a real server, and use a good certificate, this problem will not happen any more.
 
 ### Note
-Modified fork of: `https://github.com/eltoroit/ET_LWC_Out_NodeJS` described in article `https://eltoroit.medium.com/lightning-web-components-support-lightning-out-5a79c513302f`
+- Modified fork of: `https://github.com/eltoroit/ET_LWC_Out_NodeJS` 
+- Described in article: `https://eltoroit.medium.com/lightning-web-components-support-lightning-out-5a79c513302f`
+
+- NEVER store the private keys in a repository! They are private! I only stored the private key (domain.key) here because it’s a self-signed certificate and I do not need to protect it.

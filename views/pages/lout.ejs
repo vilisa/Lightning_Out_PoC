@@ -2,40 +2,63 @@
 <html>
 
 <head>
-	<%- include('../partials/header.ejs', {title: 'Lightning Out'}) %>
+	<meta charset="utf-8" />
+	<meta
+		http-equiv="x-ua-compatible"
+		content="ie=edge"
+	/>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	/>
+	<title>Lightning Out POC</title>
+
+	<!--Load Lightning Out Script from Salesforce-->
 	<script src="<%- sfdcServerUrl %>/lightning/lightning.out.js"></script>
 </head>
 
+
 <body>
-	<div id="auraLightning"></div>
-	<hr />
-	<hr />
-	<hr />
-	<div id="lwcLightning"></div>
+	<h1>Unauthorized</h1>
+	<div id="lwcLightningUnauthorized"></div>
+	<br>
+	<br>
+	<h1>Authorized</h1>
+	<div id="lwcLightningAuthorized"></div>
 </body>
 
+
 <script>
+	//Unauthorized
 	$Lightning.use(
 		"<%- appName %>",
 		() => {
 			$Lightning.createComponent(
-				"<%- auraCmpName %>",
-				{ msg: "It works (Aura)!" },
-				"auraLightning",
-				(cmp) => {
-					console.log("Aura component was created");
-				}
-			);
-			$Lightning.createComponent(
 				"<%- lwcCmpName %>",
 				{ msg: "It works (LWC)!" },
-				"lwcLightning",
+				"lwcLightningUnauthorized",
 				(cmp) => {
-					console.log("LWC component was created");
+					console.log("LWC component was created (unauthorized)");
 				}
 			);
 		},
-		"<%- lightningServerUrl %>",
+		"<%- experienceSiteUrl %>"
+	);
+
+	//Authorized
+	$Lightning.use(
+		"<%- appName %>",
+		() => {
+			$Lightning.createComponent(
+				"<%- lwcCmpName %>",
+				{ msg: "It works (LWC)!" },
+				"lwcLightningAuthorized",
+				(cmp) => {
+					console.log("LWC component was created (authorized)");
+				}
+			);
+		},
+		"<%- experienceSiteUrl %>",
 		"<%- accessToken %>"
 	);
 </script>

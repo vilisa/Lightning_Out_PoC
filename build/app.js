@@ -23,24 +23,23 @@ app.set('views', path_1.default.join(__dirname + '/../', 'views'));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.static(path_1.default.join(__dirname + '/../', 'public')));
-// CORS (Needed to make request to Lightning Out Javascript library from JavaScript code)
+/*Allow CORS*/
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization,X-Authorization');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Expose-Headers', 'X-Api-Version, X-Request-Id, X-Response-Time');
+    res.setHeader('Access-Control-Max-Age', '1000');
     next();
 });
 // Set paths
 app.get('/', function (req, res, next) {
     salesforce_1.Salesforce.userLogin_UNPW()
         .then(function (loginResponse) {
-        res.render('pages/lout', {
-            appName: "c:AuraApp",
-            auraCmpName: "c:AuraCmp",
-            lwcCmpName: "c:lwcCmp",
-            sfdcServerUrl: loginResponse.sfdcServerUrl,
-            lightningServerUrl: loginResponse.lightningServerUrl,
-            accessToken: loginResponse.accessToken
-        });
+        res.render('pages/lout', Object.assign(loginResponse, {
+            appName: 'c:LightningOutPublic',
+            lwcCmpName: 'c:mfPollBanner'
+        }));
     })
         .catch(function (err) {
         return next(err);
