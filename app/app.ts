@@ -8,7 +8,7 @@ import path from 'path';
 import http from 'http';
 import https from 'https';
 import express from 'express';
-import jsforce from 'jsforce';
+//import jsforce from 'jsforce';
 import bodyParser from 'body-parser';
 import {Salesforce} from './lib/salesforce';
 
