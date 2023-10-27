@@ -14,7 +14,7 @@
 	<title>Lightning Out POC</title>
 
 	<!--Load Lightning Out Script from Salesforce-->
-	<script src="<%- experienceSiteUrl %>/lightning/lightning.out.js"></script>
+	<script src="https://fazercs--dev.sandbox.my.site.com/lightning/lightning.out.js"></script>
 </head>
 
 
@@ -31,10 +31,10 @@
 <script>
 	//Unauthorized
 	$Lightning.use(
-		"<%- appNamePublic %>",
+		"c:LightningOutPublic",
 		() => {
 			$Lightning.createComponent(
-				"<%- lwcCmpName %>",
+				"c:mfPollBanner",
 				{ msg: "It works (LWC)!" },
 				"divContainerLwcLightningUnauthorized",
 				(cmp) => {
@@ -42,15 +42,15 @@
 				}
 			);
 		},
-		"<%- experienceSiteUrl %>"
+		"https://fazercs--dev.sandbox.my.site.com"
 	);
 
 	//Authorized
 	$Lightning.use(
-		"<%- appNamePrivate %>",
+		"c:LightningOutPrivate",
 		() => {
 			$Lightning.createComponent(
-				"<%- lwcCmpName %>",
+				"c:mfPollBanner",
 				{ msg: "It works (LWC)!" },
 				"divContainerLwcLightningAuthorized",
 				(cmp) => {
@@ -58,7 +58,7 @@
 				}
 			);
 		},
-		"<%- experienceSiteUrl %>",
+		"https://fazercs--dev.sandbox.my.site.com",
 		"<%- accessToken %>"
 	);
 </script>
