@@ -44,8 +44,7 @@ app.get('/', (req, res, next) => {
 				'pages/lout',
 				Object.assign(loginResponse, {
 					appNamePublic: 'c:LightningOutPublic',
-					appNamePrivate: 'c:LightningOutPrivate',
-					lwcCmpName: 'c:mfPollBanner'
+					appNamePrivate: 'c:LightningOutPrivate'
 				})
 			);
 		})

@@ -34,7 +34,7 @@
 		"<%- appNamePublic %>",
 		() => {
 			$Lightning.createComponent(
-				"<%- lwcCmpName %>",
+				"c:mfPollBanner",
 				{ msg: "It works (LWC)!" },
 				"divContainerLwcLightningUnauthorized",
 				(cmp) => {
@@ -45,22 +45,24 @@
 		"<%- experienceSiteUrl %>"
 	);
 
-	//Authorized
-	$Lightning.use(
-		"<%- appNamePrivate %>",
-		() => {
-			$Lightning.createComponent(
-				"<%- lwcCmpName %>",
-				{ msg: "It works (LWC)!" },
-				"divContainerLwcLightningAuthorized",
-				(cmp) => {
-					console.log("LWC component was created (authorized)");
-				}
-			);
-		},
-		"<%- experienceSiteUrl %>",
-		"<%- accessToken %>"
-	);
+	/* Not working - 401: strict-origin-when-cross-origin
+		//Authorized
+		$Lightning.use(
+			"<%- appNamePrivate %>",
+			() => {
+				$Lightning.createComponent(
+					"c:mfPollBanner",
+					{ msg: "It works (LWC)!" },
+					"divContainerLwcLightningAuthorized",
+					(cmp) => {
+						console.log("LWC component was created (authorized)");
+					}
+				);
+			},
+			"<%- experienceSiteUrl %>",
+			"<%- accessToken %>"
+		);
+	*/
 </script>
 
 </html>
