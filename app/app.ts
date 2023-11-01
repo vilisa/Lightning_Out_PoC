@@ -23,30 +23,67 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname + '/../', 'public')));
 
-/*Allow CORS*/
+//Add headers before the routes are defined
+
 app.use(function (req, res, next) {
+	//Website you wish to allow to connect
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization,X-Authorization'
-	);
-	res.setHeader('Access-Control-Allow-Methods', '*');
-	res.setHeader('Access-Control-Expose-Headers', 'X-Api-Version, X-Request-Id, X-Response-Time');
-	res.setHeader('Access-Control-Max-Age', '1000');
+
+	//Request methods you wish to allow
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+	// Request headers you wish to allow
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+	//Set to true if you need the website to include cookies in the requests sent
+	//to the API (e.g. in case you use sessions)
+	res.setHeader('Access-Control-Allow-Credentials', true);
+
+	//Pass to next layer of middleware
 	next();
 });
 
-// Set paths
+//Set paths
+//Test
 app.get('/', (req, res, next) => {
-	Salesforce.userLogin_UNPW()
+	Salesforce.userLogin_OAUTH()
 		.then((loginResponse) => {
 			res.render(
-				'pages/lout',
+				'pages/exampleBoth',
 				Object.assign(loginResponse, {
 					appNamePublic: 'c:LightningOutPublic',
 					appNamePrivate: 'c:LightningOutPrivate'
 				})
 			);
+		})
+		.catch((err) => {
+			return next(err);
+		});
+});
+
+//Private
+app.get('/private', (req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	Salesforce.userLogin_OAUTH()
+		.then((loginResponse) => {
+			res.render('pages/hardcodedExamplePrivate', loginResponse);
+		})
+		.catch((err) => {
+			return next(err);
+		});
+});
+
+//Public
+app.get('/public', (req, res, next) => {
+	res.render('pages/hardcodedExamplePublic', {});
+});
+
+//Both
+app.get('/both', (req, res, next) => {
+	Salesforce.userLogin_OAUTH()
+		.then((loginResponse) => {
+			res.render('pages/hardcodedExamplePrivate', loginResponse);
 		})
 		.catch((err) => {
 			return next(err);

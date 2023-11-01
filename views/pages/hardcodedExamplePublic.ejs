@@ -19,12 +19,10 @@
 
 
 <body>
-	<h1>Unauthorized</h1>
-	<div id="divContainerLwcLightningUnauthorized"></div>
-	<br>
-	<br>
-	<h1>Authorized</h1>
-	<div id="divContainerLwcLightningAuthorized"></div>
+	<center>
+		<h1>Unauthorized</h1>
+		<div id="divContainerLwcLightningUnauthorized"></div>
+	</center>
 </body>
 
 
@@ -43,23 +41,6 @@
 			);
 		},
 		"https://fazercs--dev.sandbox.my.site.com"
-	);
-
-	//Authorized
-	$Lightning.use(
-		"c:LightningOutPrivate",
-		() => {
-			$Lightning.createComponent(
-				"c:mfPollBanner",
-				{ msg: "It works (LWC)!" },
-				"divContainerLwcLightningAuthorized",
-				(cmp) => {
-					console.log("LWC component was created (authorized)");
-				}
-			);
-		},
-		"https://fazercs--dev.sandbox.my.site.com",
-		"<%- accessToken %>"
 	);
 </script>
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta
+		http-equiv="x-ua-compatible"
+		content="ie=edge"
+	/>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	/>
+	<title>Lightning Out POC</title>
+
+	<!--Load Lightning Out Script from Salesforce-->
+	<script src="<%-experienceSiteUrl%>/lightning/lightning.out.js"></script>
+</head>
+
+
+<body>
+	<center>
+		<a href="/public">
+			<h1>Unauthorized</h1>
+		</a>
+		<div id="divContainerLwcLightningUnauthorized"></div>
+		<br>
+		<br>
+		<a href="/private">
+			<h1>Authorized</h1>
+		</a>
+		<p style="width:50%">
+			Cant have 2 different LightningOut apps on the same page. If using public components mixed with
+			authenticated ones, public components must be included to Private LightningOut app, and use only the
+			authenticated Lightning Out app to access them on the page. Click the link to go to page with only
+			authenticated app.
+		</p>
+		<div id="divContainerLwcLightningAuthorized"></div>
+	</center>
+</body>
+
+
+<script>
+	//Unauthorized
+	$Lightning.use(
+		"<%-appNamePublic%>",
+		() => {
+			$Lightning.createComponent(
+				"c:mfPollBanner",
+				{ msg: "It works (LWC)!" },
+				"divContainerLwcLightningUnauthorized",
+				(cmp) => {
+					console.log("LWC component was created (unauthorized)");
+				}
+			);
+		},
+		"<%-experienceSiteUrl%>"
+	);
+
+	//Authorized
+	$Lightning.use(
+		"<%-appNamePrivate%>",
+		() => {
+			$Lightning.createComponent(
+				"c:mfPollBanner",
+				{ msg: "It works (LWC)!" },
+				"divContainerLwcLightningAuthorized",
+				(cmp) => {
+					console.log("LWC component was created (authorized)");
+				}
+			);
+		},
+		"<%-lightningUrl%>",
+		"<%-accessToken%>"
+	);
+</script>
+
+</html>

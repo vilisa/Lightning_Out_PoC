@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta
+		http-equiv="x-ua-compatible"
+		content="ie=edge"
+	/>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	/>
+	<title>Lightning Out POC</title>
+
+	<!-- Load Lightning Out Script from Salesforce : Needs to use lightning URL instead of Experience URL for authrorised connection! -->
+	<script src="https://fazercs--dev.sandbox.lightning.force.com/lightning/lightning.out.js"></script>
+</head>
+
+
+<body>
+	<center>
+		<h1>Private / Authorized</h1>
+		<span style="color: grey;">
+			<%-accessToken%>
+		</span>
+		<h2>Poll Banner</h2>
+		<hr>
+		<div id="pollBannerContainer"></div>
+		<h2>My Profile</h2>
+		<hr>
+		<div id="profileContainer"></div>
+	</center>
+</body>
+
+
+<script>
+	//Authorized
+	$Lightning.use(
+		"c:LightningOutPrivate",
+		() => {
+			//PollBanner
+			$Lightning.createComponent(
+				"c:mfPollBanner",
+				{ msg: "It works (LWC)!" },
+				"pollBannerContainer",
+				(cmp) => {
+					console.log("LWC component was created (authorized)");
+				}
+			);
+
+			//MyProfile
+			$Lightning.createComponent(
+				"c:mfMyProfile",
+				{ msg: "It works (LWC)!" },
+				"profileContainer",
+				(cmp) => {
+					console.log("LWC component was created (authorized)");
+				}
+			);
+		},
+		"https://fazercs--dev.sandbox.lightning.force.com", //Needs to use lightning URL instead of Experience URL for authrorised connection!
+		"<%-accessToken%>"
+	);
+</script>
+
+</html>

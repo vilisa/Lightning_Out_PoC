@@ -31,7 +31,7 @@ var Salesforce = /** @class */ (function () {
 		if (!output) throw new Error('SALESFORCE_USER_PASSWORD does not have a valid value');
 		// output = output && (SALESFORCE_USER_SECTOKEN ? true : false); if (!output) throw new Error(`SALESFORCE_USER_SECTOKEN does not have a valid value`);
 	};
-	Salesforce.userLogin_UNPW = function () {
+	Salesforce.userLogin_OAUTH = function () {
 		this.checkEnvironmentVariables();
 		return new Promise(function (resolve, reject) {
 			conn = new jsforce_1.default.Connection({loginUrl: SALESFORCE_LOGIN_SERVER});
