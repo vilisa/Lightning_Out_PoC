@@ -14,12 +14,12 @@
 	<title>Lightning Out POC</title>
 
 	<!-- Load Lightning Out Script from Salesforce : Needs to use lightning URL instead of Experience URL for authrorised connection! -->
-	<script src="https://fazercs--dev.sandbox.lightning.force.com/lightning/lightning.out.js"></script>
+	<script src="<%-lightningUrl%>/lightning/lightning.out.js"></script>
 </head>
 
 
 <body>
-	<%-include('../partials/nav.ejs', {page: 'hardcodedPrivate'})%>
+	<%-include('../partials/nav.ejs', {page: 'private'})%>
 
 	<center>
 		<h1>Private / Authorized</h1>
@@ -39,7 +39,7 @@
 <script>
 	//Authorized
 	$Lightning.use(
-		"c:LightningOutPrivate",
+		"<%-appNamePrivate%>",
 		() => {
 			//PollBanner
 			$Lightning.createComponent(
@@ -61,7 +61,7 @@
 				}
 			);
 		},
-		"https://fazercs--dev.sandbox.lightning.force.com", //Needs to use lightning URL instead of Experience URL for authrorised connection!
+		"<%-lightningUrl%>", //Needs to use lightning URL instead of Experience URL for authrorised connection!
 		"<%-accessToken%>"
 	);
 </script>

@@ -1,0 +1,42 @@
+<%-include('../partials/style.ejs')%>
+
+<div class="navigatio">
+    <ul>
+        <li>
+            <a
+                href="/"
+                class="<%=page=='home' ? 'active' : ''%>"
+            >Home</a>
+        </li>
+        <li>
+            <a
+                href="/public"
+                class="<%=page=='public' ? 'active' : ''%>"
+            >Public</a>
+        </li>
+        <li>
+            <a
+                href="/private"
+                class="<%=page=='private' ? 'active' : ''%>"
+            >Private</a>
+        </li>
+        <li>
+            <a
+                href="/both"
+                class="<%=page=='both' ? 'active' : ''%>"
+            >Both</a>
+        </li>
+        <li>
+            <a
+                href="/hardcoded/public"
+                class="<%=page=='hardcodedPublic' ? 'active' : ''%>"
+            >Hardcoded Public</a>
+        </li>
+        <li>
+            <a
+                href="/hardcoded/private"
+                class="<%=page=='hardcodedPrivate' ? 'active' : ''%>"
+            >Hardcoded Private</a>
+        </li>
+    </ul>
+</div>

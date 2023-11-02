@@ -16,6 +16,13 @@ import {Salesforce} from './lib/salesforce';
 const app: express.Application = express();
 const PORT: number = Number(process.env.PORT);
 
+const LIGHTNINGOUT_APPS = {
+	appNamePublic: process.env.APPNAME_PUBLIC,
+	appNamePrivate: process.env.APPNAME_PRIVATE,
+	experienceSiteUrl: process.env.SALESFORCE_EXPERIENCE_DOMAIN,
+	lightningUrl: process.env.SALESFORCE_LIGHTNING_URL
+};
+
 // Configure a new express application instance
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname + '/../', 'views'));
@@ -44,17 +51,12 @@ app.use(function (req, res, next) {
 });
 
 //Set paths
+
 //Test
 app.get('/', (req, res, next) => {
 	Salesforce.userLogin_OAUTH()
 		.then((loginResponse) => {
-			res.render(
-				'pages/exampleBoth',
-				Object.assign(loginResponse, {
-					appNamePublic: 'c:LightningOutPublic',
-					appNamePrivate: 'c:LightningOutPrivate'
-				})
-			);
+			res.render('pages/home', Object.assign(loginResponse, LIGHTNINGOUT_APPS));
 		})
 		.catch((err) => {
 			return next(err);
@@ -67,7 +69,7 @@ app.get('/private', (req, res, next) => {
 
 	Salesforce.userLogin_OAUTH()
 		.then((loginResponse) => {
-			res.render('pages/hardcodedExamplePrivate', loginResponse);
+			res.render('pages/private', Object.assign(loginResponse, LIGHTNINGOUT_APPS));
 		})
 		.catch((err) => {
 			return next(err);
@@ -76,18 +78,36 @@ app.get('/private', (req, res, next) => {
 
 //Public
 app.get('/public', (req, res, next) => {
-	res.render('pages/hardcodedExamplePublic', {});
+	res.render('pages/public', LIGHTNINGOUT_APPS);
 });
 
 //Both
 app.get('/both', (req, res, next) => {
 	Salesforce.userLogin_OAUTH()
 		.then((loginResponse) => {
-			res.render('pages/hardcodedExamplePrivate', loginResponse);
+			res.render('pages/exampleBoth', Object.assign(loginResponse, LIGHTNINGOUT_APPS));
 		})
 		.catch((err) => {
 			return next(err);
 		});
+});
+
+//Private (hardcoded)
+app.get('/hardcoded/private', (req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	Salesforce.userLogin_OAUTH()
+		.then((loginResponse) => {
+			res.render('pages/hardcodedExamplePrivate', Object.assign(loginResponse, LIGHTNINGOUT_APPS));
+		})
+		.catch((err) => {
+			return next(err);
+		});
+});
+
+//Public (hardcoded)
+app.get('/hardcoded/public', (req, res, next) => {
+	res.render('pages/hardcodedExamplePublic', LIGHTNINGOUT_APPS);
 });
 
 // Start server (HTTP & HTTPS)

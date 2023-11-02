@@ -69,8 +69,6 @@ export class Salesforce {
 							username: SALESFORCE_USER_USERNAME,
 							accessToken: conn.accessToken,
 							instanceUrl: conn.instanceUrl,
-							lightningUrl: SALESFORCE_EXPERIENCE_DOMAIN,
-							experienceSiteUrl: SALESFORCE_EXPERIENCE_DOMAIN,
 							userId: userInfo.id,
 							orgId: userInfo.organizationId
 						};

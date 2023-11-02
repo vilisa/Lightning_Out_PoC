@@ -2,8 +2,6 @@
 <html>
 
 <head>
-	<%-include('../partials/nav.ejs', {page: 'hardcodedPublic'})%>
-
 	<meta charset="utf-8" />
 	<meta
 		http-equiv="x-ua-compatible"
@@ -16,11 +14,13 @@
 	<title>Lightning Out POC</title>
 
 	<!--Load Lightning Out Script from Salesforce-->
-	<script src="https://fazercs--dev.sandbox.my.site.com/lightning/lightning.out.js"></script>
+	<script src="<%-experienceSiteUrl%>/lightning/lightning.out.js"></script>
 </head>
 
 
 <body>
+	<%-include('../partials/nav.ejs', {page: 'public'})%>
+
 	<center>
 		<h1>Unauthorized</h1>
 		<div id="divContainer"></div>
@@ -31,7 +31,7 @@
 <script>
 	//Unauthorized
 	$Lightning.use(
-		"c:LightningOutPublic",
+		"<%-appNamePublic%>",
 		() => {
 			$Lightning.createComponent(
 				"c:mfPollBanner",
@@ -51,7 +51,7 @@
 				}
 			);
 		},
-		"https://fazercs--dev.sandbox.my.site.com"
+		"<%-experienceSiteUrl%>"
 	);
 </script>
 
