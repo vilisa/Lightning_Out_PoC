@@ -14,7 +14,7 @@
 	<title>Lightning Out POC</title>
 
 	<!-- Load Lightning Out Script from Salesforce : Needs to use lightning URL instead of Experience URL for authrorised connection! -->
-	<script src="https://fazercs--dev.sandbox.lightning.force.com/lightning/lightning.out.js"></script>
+	<script src="https://fazercs--partial.sandbox.lightning.force.com/lightning/lightning.out.js"></script>
 </head>
 
 
@@ -26,12 +26,14 @@
 		<span style="color: grey;">
 			<%-accessToken%>
 		</span>
-		<h2>Poll Banner</h2>
-		<hr>
-		<div id="pollBannerContainer"></div>
-		<h2>My Profile</h2>
-		<hr>
-		<div id="profileContainer"></div>
+		<div id="lightningOutContainer">
+			<h2>Poll Banner</h2>
+			<hr>
+			<div id="pollBannerContainer"></div>
+			<h2>My Profile</h2>
+			<hr>
+			<div id="profileContainer"></div>
+		</div>
 	</center>
 </body>
 
@@ -61,7 +63,7 @@
 				}
 			);
 		},
-		"https://fazercs--dev.sandbox.lightning.force.com", //Needs to use lightning URL instead of Experience URL for authrorised connection!
+		"https://fazercs--partial.sandbox.lightning.force.com", //Needs to use lightning URL instead of Experience URL for authrorised connection!
 		"<%-accessToken%>"
 	);
 </script>

@@ -2,28 +2,28 @@
 <html>
 
 <head>
-	<%-include('../partials/nav.ejs', {page: 'hardcodedPublic'})%>
+		<meta charset="utf-8" />
+		<meta
+			http-equiv="x-ua-compatible"
+			content="ie=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
+		<title>Lightning Out POC</title>
 
-	<meta charset="utf-8" />
-	<meta
-		http-equiv="x-ua-compatible"
-		content="ie=edge"
-	/>
-	<meta
-		name="viewport"
-		content="width=device-width, initial-scale=1"
-	/>
-	<title>Lightning Out POC</title>
-
-	<!--Load Lightning Out Script from Salesforce-->
-	<script src="https://fazercs--dev.sandbox.my.site.com/lightning/lightning.out.js"></script>
+		<!--Load Lightning Out Script from Salesforce-->
+		<script src="https://fazercs--partial.sandbox.my.site.com/lightning/lightning.out.js"></script>
 </head>
 
 
 <body>
+	<%-include('../partials/nav.ejs', {page: 'hardcodedPublic'})%>
+	
 	<center>
 		<h1>Unauthorized</h1>
-		<div id="divContainer"></div>
+		<div id="lightningOutContainer"></div>
 	</center>
 </body>
 
@@ -36,7 +36,7 @@
 			$Lightning.createComponent(
 				"c:mfPollBanner",
 				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
-				"divContainer",
+				"lightningOutContainer",
 				(cmp) => {
 					console.log("LWC component was created (unauthorized)");
 				}
@@ -45,13 +45,13 @@
 			$Lightning.createComponent(
 				"c:mfServices",
 				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
-				"divContainer",
+				"lightningOutContainer",
 				(cmp) => {
 					console.log("LWC component was created (unauthorized)");
 				}
 			);
 		},
-		"https://fazercs--dev.sandbox.my.site.com"
+		"https://fazercs--partial.sandbox.my.site.com"
 	);
 </script>
 
