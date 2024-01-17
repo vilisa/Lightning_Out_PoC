@@ -15,11 +15,15 @@ import {Salesforce} from './lib/salesforce';
 // Constants
 const app: express.Application = express();
 const PORT: number = Number(process.env.PORT);
+const LANGUAGE: string = `${process.env.LANGUAGE}`;
 
 const LIGHTNINGOUT_APPS = {
 	appNamePublic: process.env.APPNAME_PUBLIC,
 	appNamePrivate: process.env.APPNAME_PRIVATE,
-	experienceSiteUrl: process.env.SALESFORCE_EXPERIENCE_DOMAIN,
+	experienceSiteUrl: process.env.SALESFORCE_EXPERIENCE_SITE_URL_FI,
+	experienceSiteUrl_EN: process.env.SALESFORCE_EXPERIENCE_SITE_URL_EN,
+	experienceSiteUrl_FI: process.env.SALESFORCE_EXPERIENCE_SITE_URL_FI,
+	experienceSiteUrl_SV: process.env.SALESFORCE_EXPERIENCE_SITE_URL_SV,
 	lightningUrl: process.env.SALESFORCE_LIGHTNING_URL
 };
 
@@ -63,6 +67,22 @@ app.get('/', (req, res, next) => {
 		});
 });
 
+//FAQ
+app.get('/faq/en', (req, res, next) => {
+	res.render('pages/faqEN', LIGHTNINGOUT_APPS);
+});
+app.get('/faq/fi', (req, res, next) => {
+	res.render('pages/faqFI', LIGHTNINGOUT_APPS);
+});
+app.get('/faq/sv', (req, res, next) => {
+	res.render('pages/faqSV', LIGHTNINGOUT_APPS);
+});
+
+//Public
+app.get('/public', (req, res, next) => {
+	res.render('pages/public', LIGHTNINGOUT_APPS);
+});
+
 //Private
 app.get('/private', (req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -74,11 +94,6 @@ app.get('/private', (req, res, next) => {
 		.catch((err) => {
 			return next(err);
 		});
-});
-
-//Public
-app.get('/public', (req, res, next) => {
-	res.render('pages/public', LIGHTNINGOUT_APPS);
 });
 
 //Both
