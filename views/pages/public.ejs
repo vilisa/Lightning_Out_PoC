@@ -19,12 +19,15 @@
 
 
 <body>
-	<%-include('../partials/nav.ejs', {page: 'public'})%>
+	<%-include('../partials/nav.ejs',{page: 'public'})%>
 
-	<center>
-		<h1>Unauthorized</h1>
-		<div id="divContainer"></div>
-	</center>
+		<center>
+			<h1>Unauthorized</h1>
+			<div
+				style="width: 80%;"
+				id="divContainer"
+			></div>
+		</center>
 </body>
 
 
@@ -34,17 +37,11 @@
 		"<%-appNamePublic%>",
 		() => {
 			$Lightning.createComponent(
-				"c:mfPollBanner",
-				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
-				"divContainer",
-				(cmp) => {
-					console.log("LWC component was created (unauthorized)");
-				}
-			);
-
-			$Lightning.createComponent(
-				"c:mfServices",
-				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
+				"c:mfMyProfile",
+				{
+					defaultCountryCode: 'FI',
+					preferenceCategoryNamesSetting: "'Hyvinvointi ja terveys', 'Reseptit', 'Kahvilat ja ravintolat', 'Tapahtumat', 'Kilpailut ja vaikuttaminen', 'Tuotteet'"
+				},
 				"divContainer",
 				(cmp) => {
 					console.log("LWC component was created (unauthorized)");
