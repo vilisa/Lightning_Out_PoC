@@ -14,7 +14,7 @@
 	<title>Lightning Out POC</title>
 
 	<!--Load Lightning Out Script from Salesforce-->
-	<script src="<%-experienceSiteUrl%>/lightning/lightning.out.js"></script>
+	<script src="<%-experienceSiteUrl_FI%>/lightning/lightning.out.js"></script>
 </head>
 
 
@@ -39,6 +39,8 @@
 			$Lightning.createComponent(
 				"c:mfMyProfile",
 				{
+					context: 'lighting_out',
+					myfazerUserId: '0bc01b36-46c6-4651-9186-33b463f4dd73',
 					defaultCountryCode: 'FI',
 					preferenceCategoryNamesSetting: "'Hyvinvointi ja terveys', 'Reseptit', 'Kahvilat ja ravintolat', 'Tapahtumat', 'Kilpailut ja vaikuttaminen', 'Tuotteet'"
 				},
@@ -48,7 +50,7 @@
 				}
 			);
 		},
-		"<%-experienceSiteUrl%>"
+		"<%-experienceSiteUrl_FI%>"
 	);
 </script>
 

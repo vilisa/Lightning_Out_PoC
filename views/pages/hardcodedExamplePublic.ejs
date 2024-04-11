@@ -23,7 +23,7 @@
 	
 	<center>
 		<h1>Unauthorized</h1>
-		<div id="lightningOutContainer"></div>
+		<div style="width: 80%;" id="lightningOutContainer"></div>
 	</center>
 </body>
 
@@ -34,24 +34,20 @@
 		"c:LightningOutPublic",
 		() => {
 			$Lightning.createComponent(
-				"c:mfPollBanner",
-				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
-				"lightningOutContainer",
-				(cmp) => {
-					console.log("LWC component was created (unauthorized)");
-				}
-			);
-
-			$Lightning.createComponent(
-				"c:mfServices",
-				{ parameter1: "JSON can be used to send info to the LWC component, like with Experience Builder configs" },
+				"c:mfMyProfile",
+				{
+					context: 'lighting_out',
+					myfazerUserId: '72599f6a-0c2a-45b1-ab84-d2570e49eec8',
+					defaultCountryCode: 'FI',
+					preferenceCategoryNamesSetting: "'Hyvinvointi ja terveys', 'Reseptit', 'Kahvilat ja ravintolat', 'Tapahtumat', 'Kilpailut ja vaikuttaminen', 'Tuotteet'"
+				},
 				"lightningOutContainer",
 				(cmp) => {
 					console.log("LWC component was created (unauthorized)");
 				}
 			);
 		},
-		"https://fazercs--partial.sandbox.my.site.com"
+		"https://fazercs--partial.sandbox.my.site.com/lightningoutfi/"
 	);
 </script>
 
